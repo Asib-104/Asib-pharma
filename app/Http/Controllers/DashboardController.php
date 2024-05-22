@@ -26,12 +26,12 @@ class DashboardController extends Controller
                 ->name('pieChart')
                 ->type('pie')
                 ->size(['width' => 400, 'height' => 200])
-                ->labels(['Total Purchases', 'Total Suppliers','Total Sales'])
+                ->labels(['Total Suppliers','Total Sales'])
                 ->datasets([
                     [
-                        'backgroundColor' => ['#FF6384', '#36A2EB','#7bb13c'],
-                        'hoverBackgroundColor' => ['#FF6384', '#36A2EB','#7bb13c'],
-                        'data' => [$total_purchases, $total_suppliers,$total_sales]
+                        'backgroundColor' => [ '#36A2EB','#7bb13c'],
+                        'hoverBackgroundColor' => ['#36A2EB','#7bb13c'],
+                        'data' => [ $total_suppliers,$total_sales]
                     ]
                 ])
                 ->options([]);
