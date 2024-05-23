@@ -19,7 +19,6 @@
 		<button class="btn btn-primary btn-block" type="submit">Login</button>
 	</div>
 </form>
-<!-- /Form -->
 
 {{-- <div class="text-center forgotpass"><a href="{{route('forgot-password')}}">Forgot Password?</a></div> --}}
 
