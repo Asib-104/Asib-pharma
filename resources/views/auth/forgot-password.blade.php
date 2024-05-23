@@ -1,5 +1,4 @@
 @extends('layouts.auth')
-
 @section('content')
 <h1>Forgot Password?</h1>
 <p class="account-subtitle">Enter your email to get a password reset link</p>
@@ -23,6 +22,5 @@
 	</div>
 </form>
 <!-- /Form -->
-
 <div class="text-center dont-have">Remember your password? <a href="{{route('login')}}">Login</a></div>
 @endsection
