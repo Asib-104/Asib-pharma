@@ -12,11 +12,7 @@ use App\Notifications\StockAlert;
 
 class SalesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $title = "sales";
@@ -28,12 +24,7 @@ class SalesController extends Controller
         ));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -42,10 +33,7 @@ class SalesController extends Controller
         ]);
         $sold_product = Product::find($request->product);
         
-        /**update quantity of
-            sold item from
-         purchases
-        **/
+       
         $purchased_item = Purchase::find($sold_product->purchase->id);
         $new_quantity = ($purchased_item->quantity) - ($request->quantity);
         $notification = '';
@@ -71,10 +59,10 @@ class SalesController extends Controller
             );
         } 
         if($new_quantity <=1 && $new_quantity !=0){
-            // send notification 
+            
             $product = Purchase::where('quantity', '<=', 1)->first();
             event(new PurchaseOutStock($product));
-            // end of notification 
+            
             $notification = array(
                 'message'=>"Product is running out of stock!!!",
                 'alert-type'=>'danger'
@@ -84,24 +72,13 @@ class SalesController extends Controller
         return back()->with($notification);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
         $this->validate($request,[
@@ -110,10 +87,7 @@ class SalesController extends Controller
         ]);
         $sold_product = Product::find($request->product);
         
-        /**update quantity of
-            sold item from
-         purchases
-        **/
+        
         $purchased_item = Purchase::find($sold_product->purchase->id);
         $new_quantity = ($purchased_item->quantity) - ($request->quantity);
         if ($new_quantity > 0){
@@ -122,9 +96,7 @@ class SalesController extends Controller
                 'quantity'=>$new_quantity,
             ]);
 
-            /**
-             * calcualting item's total price
-            **/
+           
             $total_price = ($request->quantity) * ($sold_product->price);
             Sales::create([
                 'product_id'=>$request->product,
@@ -139,7 +111,7 @@ class SalesController extends Controller
         }
         
         elseif($new_quantity <=3 && $new_quantity !=0){
-            // send notification 
+
             $product = Purchase::where('quantity', '<=', 3)->first();
             event(new PurchaseOutStock($product));
             // end of notification 
