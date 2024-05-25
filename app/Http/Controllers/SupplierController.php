@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $title ="Suppliers";
@@ -20,11 +16,7 @@ class SupplierController extends Controller
         return view('suppliers',compact('title','suppliers'));
     }
 
-    /**
-     * Display a form for adding the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $title = "add supplier";
@@ -34,12 +26,7 @@ class SupplierController extends Controller
         ));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -67,12 +54,7 @@ class SupplierController extends Controller
         return redirect()->route('suppliers')->with($notification);
     }
 
-    /**
-     * Display the specified resource.
-     *@param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Request $request,$id)
     {
         $title = "edit Supplier";
@@ -83,13 +65,7 @@ class SupplierController extends Controller
         ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Supplier $supplier
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Supplier $supplier)
     {
         $this->validate($request,[
@@ -110,12 +86,7 @@ class SupplierController extends Controller
         return redirect()->route('suppliers')->with($notification);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Request $request)
     {
         $supplier = Supplier::find($request->id);
